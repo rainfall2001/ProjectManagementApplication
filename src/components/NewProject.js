@@ -143,16 +143,6 @@ function NewProject({addProject, projects}) {
                 <Form.Group className='mb-3'>
                     <Form.Control 
                         type='number' 
-                        placeholder='Project ID'
-                        onChange={(event) => setField('id', event.target.value) }
-                        isInvalid={!!errors.id}  />
-                    <Form.Control.Feedback type='invalid'>
-                        {errors.id}
-                    </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group className='mb-3'>
-                    <Form.Control 
-                        type='number' 
                         placeholder='Project Description'
                         as="textarea" 
                         rows={2}
