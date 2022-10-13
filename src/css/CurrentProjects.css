@@ -1,0 +1,18 @@
+.project-info {
+    padding-top: 0.75rem;
+    border-style: none none solid none;
+    border-width: 0.5px;
+    border-color: #D3D3D3;
+}
+
+#createNewProject {
+    margin-top: 0.75rem;
+}
+
+#searchBar {
+    margin-right: 0.3rem;
+}
+
+#controls {
+    padding-top: 10px;
+}
