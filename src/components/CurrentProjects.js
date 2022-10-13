@@ -18,6 +18,7 @@ class CurrentProjects extends Component {
             sort: ""
         };
         this.filterResults = this.filterResults.bind(this);
+        this.removeProject = this.removeProject.bind(this);
         this.getProjects = this.getProjects.bind(this);
     }
 
@@ -27,11 +28,7 @@ class CurrentProjects extends Component {
      * It will set the state of the projects to the result.
      */
     componentDidMount() {
-        fetch('http://localhost:3001/api/projects/')
-            .then(response => response.json())
-            .then(result => {
-                this.setState({ projects: result });
-            });
+        this.getProjects();
     }
 
     /**
@@ -95,10 +92,15 @@ class CurrentProjects extends Component {
      * Source: https://towardsdatascience.com/build-a-simple-todo-app-using-react-a492adc9c8a4 
      * @param {number} index The index of the project to be removed
      */
-    removeProject = (index) => {
-        const newProjects = [...this.state.projects];
-        newProjects.splice(index, 1);
-        this.setState({projects: newProjects});
+    removeProject = (id) => {
+        fetch('http://localhost:3001/api/project/id/' + id, {
+            method: "DELETE",
+        })
+        .then(this.getProjects())
+        .then(this.getProjects());
+        // const newProjects = [...this.state.projects];
+        // newProjects.splice(index, 1);
+        // this.setState({projects: newProjects});
     }
 
     getProjects() {
@@ -203,7 +205,7 @@ class CurrentProjects extends Component {
                                                         End: {item.endDate}
                                                     </Card.Text>
                                                     <div className='my-auto d-flex justify-content-end'>
-                                                        <Button variant='outline-danger' onClick={() => this.removeProject(index)}>Delete</Button>
+                                                        <Button variant='outline-danger' onClick={() => this.removeProject(item.id)}>Delete</Button>
                                                     </div>
                                                 </Card.Body>
                                             </Card>
