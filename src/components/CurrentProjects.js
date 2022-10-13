@@ -41,7 +41,7 @@ class CurrentProjects extends Component {
     filterResults() {
         if(!this.state.searchInput) return this.state.projects;
         return this.state.projects.filter(item => {
-            return item.projectName.toLowerCase().includes(this.state.searchInput.toLowerCase());
+            return item.name.toLowerCase().includes(this.state.searchInput.toLowerCase());
         });
     }
 
@@ -55,8 +55,8 @@ class CurrentProjects extends Component {
      */
     sortByName = (numOne, numTwo) => {
         this.setState({projects: this.state.projects.sort(function (a, b){
-            const nameA = a.projectName.toUpperCase();
-            const nameB = b.projectName.toUpperCase();
+            const nameA = a.name.toUpperCase();
+            const nameB = b.name.toUpperCase();
 
             if (nameA < nameB) return numOne;
             if (nameA > nameB) return numTwo;
@@ -75,8 +75,8 @@ class CurrentProjects extends Component {
     sortByDate = (numOne, numTwo) => {
         this.setState({projects: this.state.projects.sort(function (a, b) {
             //get the date part of the datetime stored
-            const arrayA = a.start_date.split(" ");
-            const arrayB = b.start_date.split(" ");
+            const arrayA = a.startDate.split(" ");
+            const arrayB = b.startDate.split(" ");
             const dateA = new Date(arrayA[0]);
             const dateB = new Date(arrayB[0]);
 
@@ -98,9 +98,6 @@ class CurrentProjects extends Component {
         })
         .then(this.getProjects())
         .then(this.getProjects());
-        // const newProjects = [...this.state.projects];
-        // newProjects.splice(index, 1);
-        // this.setState({projects: newProjects});
     }
 
     getProjects() {
